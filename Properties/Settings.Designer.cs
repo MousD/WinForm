@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuestionnaireMaths.Properties
+namespace VisioneuseImage_Etape3.Properties
 {
 
 

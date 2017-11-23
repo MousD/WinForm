@@ -1,0 +1,9 @@
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\bin\Debug\VisioneuseImage_Etape3.exe.config
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\bin\Debug\VisioneuseImage_Etape3.exe
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\bin\Debug\VisioneuseImage_Etape3.pdb
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\obj\Debug\VisioneuseImage_Etape3.csprojResolveAssemblyReference.cache
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\obj\Debug\VisioneuseImage_Etape3.Form1.resources
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\obj\Debug\VisioneuseImage_Etape3.Properties.Resources.resources
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\obj\Debug\VisioneuseImage_Etape3.csproj.GenerateResource.Cache
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\obj\Debug\VisioneuseImage_Etape3.exe
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel1_VisionneuseImages\VisioneuseImage_Etape3\obj\Debug\VisioneuseImage_Etape3.pdb

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuestionnaireMaths
+namespace VisioneuseImage_Etape3
 {
     static class Program
     {
