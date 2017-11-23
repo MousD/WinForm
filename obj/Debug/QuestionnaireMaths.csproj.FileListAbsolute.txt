@@ -1,0 +1,9 @@
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\bin\Debug\QuestionnaireMaths.exe.config
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\bin\Debug\QuestionnaireMaths.exe
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\bin\Debug\QuestionnaireMaths.pdb
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\obj\Debug\QuestionnaireMaths.csprojResolveAssemblyReference.cache
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\obj\Debug\QuestionnaireMaths.Form1.resources
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\obj\Debug\QuestionnaireMaths.Properties.Resources.resources
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\obj\Debug\QuestionnaireMaths.csproj.GenerateResource.Cache
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\obj\Debug\QuestionnaireMaths.exe
+D:\Mous D\Traveaux\TP\5_WinForm\Didacticiel2_QuestionnaireMaths\QuestionnaireMaths\obj\Debug\QuestionnaireMaths.pdb
