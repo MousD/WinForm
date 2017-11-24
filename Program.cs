@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VisioneuseImage_Etape3
+namespace MatchingGame
 {
     static class Program
     {
         /// <summary>
-        /// Point d'entrée principal de l'application.
+        /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
