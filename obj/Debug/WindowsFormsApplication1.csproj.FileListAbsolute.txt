@@ -1,0 +1,15 @@
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\bin\Debug\demo1.mdf
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\bin\Debug\demo1_log.ldf
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmModifTuple.resources
+D:\Mous D\Cours\ADO\ADO_demo2\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\Mous D\Cours\ADO\ADO_demo2\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+D:\Mous D\Cours\ADO\ADO_demo2\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

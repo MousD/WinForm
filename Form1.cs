@@ -2,181 +2,168 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Data.OleDb;
+using System.Data.OracleClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MatchingGame
+namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        // firstClicked points to the first Label control  
-        // that the player clicks, but it will be null  
-        // if the player hasn't clicked a label yet.
-        Label firstClicked = null;
-
-        // secondClicked points to the second Label control  
-        // that the player clicks.
-        Label secondClicked = null;
-        
-        // Use this Random object to choose random icons for the squares.
-        Random random = new Random();
-
-        // Each of these letters is an interesting icon 
-        // in the Webdings font, 
-        // and each icon appears twice in this list.
-        List<string> icons = new List<string>() 
-        { 
-            "!", "!", "N", "N", ",", ",", "k", "k",
-            "b", "b", "v", "v", "w", "w", "z", "z"
-        };
-
-        /// <summary> 
-        /// Assign each icon from the list of icons to a random square 
-        /// </summary> 
-        private void AssignIconsToSquares()
-        {
-            // The TableLayoutPanel has 16 labels, 
-            // and the icon list has 16 icons, 
-            // so an icon is pulled at random from the list 
-            // and added to each label.
-            foreach (Control control in tableLayoutPanel1.Controls)
-            {
-                Label iconLabel = control as Label;
-                if (iconLabel != null)
-                {
-                    int randomNumber = random.Next(icons.Count);
-                    iconLabel.Text = icons[randomNumber];
-                    iconLabel.ForeColor = iconLabel.BackColor;
-                    icons.RemoveAt(randomNumber);
-                }
-            }
-        } 
-
-
+        private string _maConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=F:\Domi\demos\ADO_demo1\WindowsFormsApplication1\demo1.mdf;Integrated Security=True";
+        SqlConnection SqlConn = new SqlConnection();
         public Form1()
         {
             InitializeComponent();
-            AssignIconsToSquares();
         }
 
-        /// <summary> 
-        /// Every label's Click event is handled by this event handler.
-        /// </summary> 
-        /// <param name="sender">The label that was clicked.</param>
-        /// <param name="e"></param>
-        private void label_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {   //Oledb = universel
+            //OleDbConnection oldbSqlConn = new OleDbConnection();
+            // autres base...ne pas oublier les references...
+            //OracleConnection test = new OracleConnection();
+
+            SqlConn.ConnectionString = _maConnectionString;
+            SqlConn.Open();
+
+            string leNom = textBox1.Text;
+
+            string reqSQL = "INSERT INTO toto (nom) VALUES ('" + leNom + "')";
+
+            SqlCommand cmd = new SqlCommand(reqSQL, SqlConn);
+            // 2. Call ExecuteNonQuery to send command
+            cmd.ExecuteNonQuery();
+
+            SqlConn.Close();
+            listBox1.DataSource = null;
+            listBox1.Items.Clear();
+            listBox1.DataSource = RecupererDonnees();
+
+
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {         
+            //List<string> lstRecupTuples =  RecupererDonnees();
+            listBox1.Items.Clear();
+            listBox1.DataSource = RecupererDonnees();
+        }
+
+        private List<string> RecupererDonnees()
         {
-            // The timer is only on after two non-matching  
-            // icons have been shown to the player,  
-            // so ignore any clicks if the timer is running 
-            if (timer1.Enabled == true)
-                return; 
+            List<string> lstLocale = new List<string>();
+
+            SqlDataReader reader; // Contiendra les données
+
+            try
+            {
+                SqlConn.ConnectionString = _maConnectionString;
+                SqlConn.Open();
+
+                //==================
+
+                // Requête SQL
+                SqlCommand selectCommand = new SqlCommand();
+                selectCommand.Connection = SqlConn; // Connexion instanciée auparavant
+                selectCommand.CommandText = "SELECT * FROM toto";
+                reader = selectCommand.ExecuteReader(); // Exécution de la requête SQL
+
+                while (reader.Read())
+                {
+                   //string s =  reader[]
+                    // Affichage des données
+                   lstLocale.Add (reader["Id"] + " " + reader["nom"]);
+                   // lstLocale.Add(reader["nom"].ToString());
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                // Affiche des erreurs
+                MessageBox.Show(ex.Message,"Probleme",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Fermeture de la connexion à la base de données
+                SqlConn.Close();
+            }
+
+            //==================
+
+            return lstLocale;
+        }
+
+        private void btnSuppr_Click(object sender, EventArgs e)
+        {
+            string itemSelection = listBox1.Text;
+            // ou listBox1.SelectedItem.ToString();
+
+            string id = TrouveMoiId(itemSelection);
+
+            SqlConn.ConnectionString = _maConnectionString;
+            SqlConn.Open();          
+
+            string reqSQL = "DELETE FROM toto WHERE Id =" + id;
+            //string reqSQL = "DELETE FROM toto WHERE nom = 'toto'";
+
+            SqlCommand cmd = new SqlCommand(reqSQL, SqlConn);
             
-            Label clickedLabel = sender as Label;
+            int result = cmd.ExecuteNonQuery();
+            if (result != 1)
+                MessageBox.Show("Pas glop");
 
-            if (clickedLabel != null)
-            {
-                // If the clicked label is black, the player clicked 
-                // an icon that's already been revealed -- 
-                // ignore the click.
-                if (clickedLabel.ForeColor == Color.Black)
-                    // All done - leave the if statements.
-                    return;
-
-                // If firstClicked is null, this is the first icon  
-                // in the pair that the player clicked, 
-                // so set firstClicked to the label that the player  
-                // clicked, change its color to black, and return. 
-                if (firstClicked == null)
-                {
-                    firstClicked = clickedLabel;
-                    firstClicked.ForeColor = Color.Black;
-
-                    // All done - leave the if statements.
-                    return;
-                }
-
-                // If the player gets this far, the timer isn't 
-                // running and firstClicked isn't null, 
-                // so this must be the second icon the player clicked 
-                // Set its color to black.
-                secondClicked = clickedLabel;
-                secondClicked.ForeColor = Color.Black;
-
-                // Check to see if the player won.
-                CheckForWinner();
-                
-                // If the player clicked two matching icons, keep them  
-                // black and reset firstClicked and secondClicked  
-                // so the player can click another icon. 
-                if (firstClicked.Text == secondClicked.Text)
-                {
-                    firstClicked = null;
-                    secondClicked = null;
-                    return;
-                }
-                
-                // If the player gets this far, the player  
-                // clicked two different icons, so start the  
-                // timer (which will wait three quarters of  
-                // a second, and then hide the icons).
-                timer1.Start();
-            }
+            SqlConn.Close();
+            listBox1.DataSource = null;
+            listBox1.Items.Clear();
+            listBox1.DataSource = RecupererDonnees();
         }
 
-        /// <summary> 
-        /// This timer is started when the player clicks  
-        /// two icons that don't match, 
-        /// so it counts three quarters of a second  
-        /// and then turns itself off and hides both icons.
-        /// </summary> 
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timer1_Tick(object sender, EventArgs e)
+        private string TrouveMoiId(string p_itemSelection)
         {
-            // Stop the timer.
-            timer1.Stop();
+            string id = "";
 
-            // Hide both icons.
-            firstClicked.ForeColor = firstClicked.BackColor;
-            secondClicked.ForeColor = secondClicked.BackColor;
+            id = p_itemSelection.Split(' ')[0];
 
-            // Reset firstClicked and secondClicked  
-            // so the next time a label is 
-            // clicked, the program knows it's the first click.
-            firstClicked = null;
-            secondClicked = null;
+            return id;
         }
 
-        /// <summary> 
-        /// Check every icon to see if it is matched, by  
-        /// comparing its foreground color to its background color.  
-        /// If all of the icons are matched, the player wins. 
-        /// </summary> 
-        private void CheckForWinner()
+        private void btnModifier_Click(object sender, EventArgs e)
         {
-            // Go through all of the labels in the TableLayoutPanel,  
-            // checking each one to see if its icon is matched.
-            foreach (Control control in tableLayoutPanel1.Controls)
-            {
-                Label iconLabel = control as Label;
+            frmModifTuple o = new frmModifTuple();
+            o.ShowDialog();
 
-                if (iconLabel != null)
-                {
-                    if (iconLabel.ForeColor == iconLabel.BackColor)
-                        return;
-                }
-            }
+            MessageBox.Show(o.Text_modif);
 
-            // If the loop didn’t return, it didn't find 
-            // any unmatched icons. 
-            // That means the user won. Show a message and close the form.
-            MessageBox.Show("You matched all the icons!", "Congratulations!");
-            Close();
+            string itemSelection = listBox1.Text;
+            string id = TrouveMoiId(itemSelection);
+
+            SqlConn.ConnectionString = _maConnectionString;
+            SqlConn.Open();
+
+            string reqSQL = "UPDATE toto SET nom = '" + o.Text_modif + "'WHERE id =" + id;
+            
+            //string reqSQL = "DELETE FROM toto WHERE nom = 'toto'";
+
+            SqlCommand cmd = new SqlCommand(reqSQL, SqlConn);
+
+            int result = cmd.ExecuteNonQuery();
+            if (result != 1)
+                MessageBox.Show("Pas glop");
+
+            SqlConn.Close();
+            listBox1.DataSource = null;
+            listBox1.Items.Clear();
+            listBox1.DataSource = RecupererDonnees();
+
+
         }
+
 
     }
 }
